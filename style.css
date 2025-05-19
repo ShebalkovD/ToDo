@@ -43,6 +43,7 @@
     --fore-color: #aaaaab;
     --hover-color: #333333;
     --accent-color: #5f8787;
+    --focus-color: #3a5454;
     --secondary-color: #5f81a5;
     --border-color: #bcbcbc;
 }
@@ -81,6 +82,12 @@ body {
 h1 {
     font-size: 3rem;
     padding: 2rem 2rem 0 2rem;
+}
+input:focus {
+    border-color: var(--accent-color);
+}
+button:focus {
+    border-color: var(--focus-color)
 }
 
 .input {

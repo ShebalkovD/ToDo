@@ -20,3 +20,8 @@ function addItem() {
 }
 
 addButton.addEventListener('click', addItem)
+input.addEventListener('keydown', (e) => {
+    if (e.code == 'Enter') {
+        addItem()
+    }
+})
