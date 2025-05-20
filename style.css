@@ -84,10 +84,10 @@ h1 {
     padding: 2rem 2rem 0 2rem;
 }
 input:focus {
-    border-color: var(--accent-color);
+    background-color: var(--hover-color);
 }
 button:focus {
-    border-color: var(--focus-color)
+    background-color: var(--focus-color);
 }
 
 .input {
@@ -106,15 +106,13 @@ button:focus {
     display: block;
     font-size: 1.5rem;
     padding: 0.2rem;
-    color: var(--bg-color);
+    color: var(--border-color);
     background-color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    border: 1px solid var(--border-color);
 }
 
 .button:hover {
-    color: var(--border-color);
-    border-color: var(--border-color);
-
+    background-color: var(--focus-color);
     cursor: pointer;
 }
 
@@ -126,8 +124,10 @@ button:focus {
 }
 
 .todo {
-    background-color: var(--hover-color);
-    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     width: calc(60% + 2rem);
 
     font-size: 1.5rem;
@@ -144,11 +144,52 @@ button:focus {
     gap: 1rem;
 }
 
+.todo:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+}
+
+.todo:first-child{
+    border: 1px solid var(--border-color);
+}
+
 .checkbox {
+    box-sizing: border-box;
     display: block;
     width: 1.5rem;
     height: 1.5rem;
-    accent-color: var(--accent-color);
+    position: relative;
+    border: 1px solid transparent;
+
+    appearance: none;
+}
+
+.checkbox:hover {
+    cursor: pointer;
+}
+
+
+.checkbox::before {
+    content: ">";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    transform: rotate(90deg);
+}
+
+.checkbox:checked::before {
+    background-color: var(--accent-color);
+    color: var(--border-color);
 }
 
 .todo_container {

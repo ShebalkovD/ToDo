@@ -5,7 +5,27 @@ const addButton = document.getElementById('add_button')
 
 let counter = 0
 
+function checkInput() {
+    if (input.value.length <= 0) {
+        return false
+    }
+    
+    // check the value includes at least one char which not a " "
+    for (let i = 0; i < input.value.length; i++) {
+        if (input.value[i] != " ") {
+            return true
+        }
+    }
+
+    return false
+}
+
 function addItem() {
+    if (checkInput() == false) {
+        alert("Заполните поле")
+        return
+    }
+
     counter++
     
     let new_item = document.createElement('article')
