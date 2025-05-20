@@ -44,6 +44,8 @@
     --hover-color: #333333;
     --accent-color: #5f8787;
     --focus-color: #3a5454;
+    --error-color: #a32a2a;
+    --error-focus-color: #872121;
     --secondary-color: #5f81a5;
     --border-color: #bcbcbc;
 }
@@ -64,6 +66,7 @@ body {
 }
 
 .container {
+    position: relative;
     width: 60%;
     height: 80vh;
     
@@ -116,6 +119,14 @@ button:focus {
     cursor: pointer;
 }
 
+.delete_button {
+    background-color: var(--error-color);
+}
+
+.delete_button:hover, .delete_button:focus {
+    background-color: var(--error-focus-color);
+}
+
 #add_button {
     display: flex;
     justify-content: center;
@@ -123,7 +134,7 @@ button:focus {
     width: 2rem;
 }
 
-.todo {
+.task {
     background-color: var(--bg-color);
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
@@ -144,12 +155,17 @@ button:focus {
     gap: 1rem;
 }
 
-.todo:hover {
+.task.done span{
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.task:hover {
     background-color: var(--hover-color);
     cursor: pointer;
 }
 
-.todo:first-child{
+.task:first-child{
     border: 1px solid var(--border-color);
 }
 
@@ -192,9 +208,65 @@ button:focus {
     color: var(--border-color);
 }
 
-.todo_container {
+.task_container {
     border-top: 2px solid var(--border-color);
     padding: 2rem;
+}
+
+.editor {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    z-index: 4000;
+
+    background-color: var(--bg-color);
+
+    width: 60%;
+    height: 100%;
+
+    border-left: 2px solid var(--border-color);
+    padding: 2rem;
+}
+.editor.show {
+    display: block;
+}
+.editor h1 {
+    padding: 0;
+}
+
+.editor .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.editor .close_button {
+    background-color: var(--bg-color);
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.editor .close_button:hover, .close_button:focus {
+    background-color: var(--hover-color);
+}
+
+.editor_input_container {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.editor .delete_button {
+    margin-left: 1rem;
 }
 
 

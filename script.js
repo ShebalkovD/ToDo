@@ -1,7 +1,11 @@
 // DOM elements
 const input = document.getElementById('main_input')
-const todoContainer = document.querySelector('.todo_container')
+const taskContainer = document.querySelector('.task_container')
 const addButton = document.getElementById('add_button')
+const editorModal = document.querySelector('.editor')
+const editInput = document.getElementById('editor_input')
+const editConfirmButton = document.getElementById('edit_confirm_button')
+const editorCloseButton = document.getElementById('editor_close_button')
 
 let counter = 0
 
@@ -20,7 +24,33 @@ function checkInput() {
     return false
 }
 
-function addItem() {
+function getTasks() {
+    let tasks = document.querySelectorAll('.task')
+
+    tasks.forEach(task => {
+        // checked styles
+        let checkbox = task.querySelector('.checkbox')
+        checkbox.addEventListener('click', function() {
+            if (checkbox.checked) {
+                task.classList.add('done')
+            }else {
+                task.classList.remove('done')
+            }
+        })
+
+        // task click handler
+        task.addEventListener('click', function() {
+            let id = task.id
+            let text = task.querySelector('span').innerText
+
+            editInput.value = text
+            editInput.dataset.id = id
+            editorModal.classList.add('show')
+        })
+    })
+}
+
+function addTask() {
     if (checkInput() == false) {
         alert("Заполните поле")
         return
@@ -28,20 +58,29 @@ function addItem() {
 
     counter++
     
-    let new_item = document.createElement('article')
-    new_item.classList.add('todo')
-    new_item.id = counter
-    new_item.innerHTML = 
+    let new_task = document.createElement('article')
+    new_task.classList.add('task')
+    new_task.id = counter
+    new_task.innerHTML = 
     `
         <input type="checkbox" id="${counter}-checkbox" class="checkbox">
         <span>${input.value}</span>
     `
-    todoContainer.appendChild(new_item)
+    taskContainer.appendChild(new_task)
+
+    getTasks()
 }
 
-addButton.addEventListener('click', addItem)
+addButton.addEventListener('click', addTask)
+
 input.addEventListener('keydown', (e) => {
     if (e.code == 'Enter') {
-        addItem()
+        addTask()
     }
 })
+
+editorCloseButton.addEventListener('click', function() {
+    editorModal.classList.remove('show')
+})
+
+

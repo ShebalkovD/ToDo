@@ -10,12 +10,24 @@
     <section class="container">
         <h1>ToDo</h1>
         <div class="main_input_container">
-            <input type="text" id="main_input" placeholder="text here..." class="input">
+            <input type="text" id="main_input" placeholder="text here..." class="input" autocomplete="off">
             <button id="add_button" class="button"> + </button>
         </div>
-        <div class="todo_container">
+        <div class="task_container">
             
         </div>
+
+        <section class="editor">
+            <div class="top">
+                <h1>Edit task</h1>
+                <button id="editor_close_button" class="button close_button">x</button>
+            </div>
+            <div class="editor_input_container">
+                <input type="text" id="editor_input" placeholder="text here..." class="input" data-id = "" autocomplete="off">
+                <button id="edit_confirm_button" class="button"> OK </button>
+                <button id="editor_delete_button" class="delete_button button">Delete</button>
+            </div>
+        </section>
     </section>
     <script src="script.js"></script>
 </body>
