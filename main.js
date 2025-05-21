@@ -24,6 +24,8 @@ function checkInput() {
 }
 
 export function getTasks() {
+    console.log('Меняем категорию на', current_category)
+    
     taskContainer.innerHTML = ''
 
     TASKS.forEach(task => {
