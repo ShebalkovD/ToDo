@@ -14,12 +14,13 @@ function loadTasks() {
         TASKS = JSON.parse(window.localStorage.getItem('tasks'))
     }
     getTasks()
+    getTaskCount()
 }
-export function saveTasks() {
+function saveTasks() {
     window.localStorage.setItem('tasks', JSON.stringify(TASKS))
 }
 
-export let TASKS = {
+let TASKS = {
     'today': [],
     'home': []
 }
@@ -41,7 +42,7 @@ function checkInput() {
     return false
 }
 
-export function getTasks() {
+function getTasks() {
     taskContainer.innerHTML = ''
     if (TASKS[current_category].length <= 0) {
         return
@@ -138,5 +139,7 @@ input.addEventListener('keydown', (e) => {
         addTask()
     }
 })
+
+export {saveTasks, getTasks, TASKS}
 
 

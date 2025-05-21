@@ -1,9 +1,9 @@
 import { getTasks, TASKS} from "./main.js"
 
-export let current_category = 'today'
+let current_category = 'today'
 const categories = document.querySelectorAll('.category_list_item')
 
-export function getTaskCount() {
+function getTaskCount() {
     categories.forEach(item => {
         let activeTasks = 0
 
@@ -22,8 +22,6 @@ export function getTaskCount() {
     })
 }
 
-getTaskCount()
-
 // category buttons handler
 categories.forEach(item => {
     item.addEventListener('click', () => {
@@ -37,3 +35,5 @@ categories.forEach(item => {
         getTasks()
     })
 })
+
+export {getTaskCount, current_category}
