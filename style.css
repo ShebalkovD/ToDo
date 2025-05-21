@@ -246,7 +246,8 @@ button:focus {
     border-top: 2px solid var(--border-color);
     padding: 2rem;
     overflow-y: auto;
-    height: 80%;
+    height: 60vh;
+    padding-bottom: 15vh;
     scrollbar-width: thin;
 }
 

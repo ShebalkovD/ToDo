@@ -6,7 +6,7 @@ const editorCloseButton = document.getElementById('editor_close_button')
 const editorDeleteButton = document.getElementById('editor_delete_button')
 
 import { TASKS, getTasks } from "./main.js"
-import { current_category } from "./sidebar.js"
+import { current_category, getTaskCount } from "./sidebar.js"
 
 // Editor handlers
 editorCloseButton.addEventListener('click', () => {
@@ -23,6 +23,7 @@ editorDeleteButton.addEventListener('click', () => {
     let currentIndex = TASKS[current_category].indexOf(currentTask)
     TASKS[current_category].splice(currentIndex, 1)
     getTasks()
+    getTaskCount()
     editorModal.classList.remove('show')
 })
 

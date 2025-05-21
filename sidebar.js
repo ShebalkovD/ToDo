@@ -2,10 +2,20 @@ export let current_category = 'today'
 import { getTasks, TASKS} from "./main.js"
 const categories = document.querySelectorAll('.category_list_item')
 
-function getTaskCount() {
+export function getTaskCount() {
     categories.forEach(item => {
         let categoryName = item.id
-        item.querySelector('.task_counter').innerText = TASKS[categoryName].length
+        let activeTasks = 0
+        TASKS[categoryName].forEach(task => {
+            if (!task.done) {
+                activeTasks++
+            }
+        })
+        if (activeTasks == 0) {
+            item.querySelector('.task_counter').innerText = ""
+        }else {
+            item.querySelector('.task_counter').innerText = activeTasks
+        }
     })
 }
 

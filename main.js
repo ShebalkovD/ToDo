@@ -3,7 +3,7 @@ const input = document.getElementById('main_input')
 const taskContainer = document.querySelector('.task_container')
 const addButton = document.getElementById('add_button')
 import { editorInput, editorModal } from "./editor.js"
-import { current_category } from "./sidebar.js"
+import { current_category, getTaskCount } from "./sidebar.js"
 
 let counter = 0
 export const TASKS = {
@@ -78,6 +78,7 @@ export function getTasks() {
                 })
                 task.classList.remove('done')
             }
+            getTaskCount()
         })
 
         // task click handler
@@ -113,6 +114,7 @@ function addTask() {
 
     input.value = ""
     getTasks()
+    getTaskCount()
 }
 
 
