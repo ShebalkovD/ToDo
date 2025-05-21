@@ -1,15 +1,30 @@
+import { openEditor } from "./editor.js"
+import { current_category, getTaskCount } from "./sidebar.js"
+
 // DOM elements
 const input = document.getElementById('main_input')
 const taskContainer = document.querySelector('.task_container')
 const addButton = document.getElementById('add_button')
-import { editorInput, editorModal } from "./editor.js"
-import { current_category, getTaskCount } from "./sidebar.js"
 
+// task id counter
 let counter = 0
-export const TASKS = {
-    'today':[],
-    'home':[]
+
+function loadTasks() {
+    if (window.localStorage.getItem('tasks') != null) {
+        TASKS = JSON.parse(window.localStorage.getItem('tasks'))
+    }
+    getTasks()
 }
+export function saveTasks() {
+    window.localStorage.setItem('tasks', JSON.stringify(TASKS))
+}
+
+export let TASKS = {
+    'today': [],
+    'home': []
+}
+
+window.addEventListener('load', () => loadTasks())
 
 function checkInput() {
     if (input.value.length <= 0) {
@@ -27,10 +42,10 @@ function checkInput() {
 }
 
 export function getTasks() {
-    console.log('Меняем категорию на', current_category)
-    
     taskContainer.innerHTML = ''
-
+    if (TASKS[current_category].length <= 0) {
+        return
+    }
     TASKS[current_category].forEach(task => {
        
         let new_task = document.createElement('article')
@@ -53,12 +68,11 @@ export function getTasks() {
         }
 
         taskContainer.appendChild(new_task)
-        
+        getTaskCount()
     })
 
-    let tasks = document.querySelectorAll('.task')
-
-    tasks.forEach(task => {
+    let task_elements = document.querySelectorAll('.task')
+    task_elements.forEach(task => {
         // checked styles
         let checkbox = task.querySelector('.checkbox')
         checkbox.addEventListener('click', function() {
@@ -79,6 +93,7 @@ export function getTasks() {
                 task.classList.remove('done')
             }
             getTaskCount()
+            saveTasks()
         })
 
         // task click handler
@@ -86,10 +101,7 @@ export function getTasks() {
             if (!e.target.classList.contains('checkbox')) {
                 let id = task.id
                 let text = task.querySelector('span').innerText
-
-                editorInput.value = text
-                editorInput.dataset.id = id
-                editorModal.classList.add('show')
+                openEditor(id, text, current_category)
             }
         })
     })
@@ -102,25 +114,25 @@ function addTask() {
     }
 
     counter++
-    
+
     let new_task = {
         id: counter,
         text: input.value,
         done: false,
         category: current_category
     }
-
     TASKS[current_category].push(new_task)
 
     input.value = ""
+
     getTasks()
     getTaskCount()
+    saveTasks()
 }
 
 
 // Task handlers
 addButton.addEventListener('click', addTask)
-
 input.addEventListener('keydown', (e) => {
     if (e.code == 'Enter') {
         addTask()

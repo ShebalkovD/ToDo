@@ -1,12 +1,20 @@
-// Dom elements
-export const editorModal = document.querySelector('.editor')
-export const editorInput = document.getElementById('editor_input')
+import { TASKS, getTasks, saveTasks } from "./main.js"
+import { current_category, getTaskCount } from "./sidebar.js"
+
+// DOM elements
+const editorModal = document.querySelector('.editor')
+const editorInput = document.getElementById('editor_input')
 const editorConfirmButton = document.getElementById('edit_confirm_button')
 const editorCloseButton = document.getElementById('editor_close_button')
 const editorDeleteButton = document.getElementById('editor_delete_button')
+const editorCategoryName = document.querySelector('.editor_category_name')
 
-import { TASKS, getTasks } from "./main.js"
-import { current_category, getTaskCount } from "./sidebar.js"
+export function openEditor(id, text, category) {
+    editorInput.dataset.id = id
+    editorInput.value = text
+    editorCategoryName.innerText = category
+    editorModal.classList.add('show')
+}
 
 // Editor handlers
 editorCloseButton.addEventListener('click', () => {
@@ -24,6 +32,7 @@ editorDeleteButton.addEventListener('click', () => {
     TASKS[current_category].splice(currentIndex, 1)
     getTasks()
     getTaskCount()
+    saveTasks()
     editorModal.classList.remove('show')
 })
 
@@ -34,6 +43,7 @@ editorConfirmButton.addEventListener('click', () => {
         }
     })
     getTasks()
+    saveTasks()
     editorModal.classList.remove('show')
 })
 
@@ -45,6 +55,7 @@ editorInput.addEventListener('keydown', (e) => {
             }
         })
         getTasks()
+        saveTasks()
         editorModal.classList.remove('show')
     }
 })

@@ -298,6 +298,7 @@ button:focus {
 
 .editor_input_container {
     margin-top: 2rem;
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -305,6 +306,14 @@ button:focus {
 
 .editor .delete_button {
     margin-left: 1rem;
+}
+.editor_category_name {
+    user-select: none;
+    margin-left: 0.5rem;
+}
+.editor_category_name:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .category_list_item {
