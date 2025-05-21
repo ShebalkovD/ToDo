@@ -2,6 +2,9 @@ import { getTasks, TASKS} from "./main.js"
 
 let current_category = 'today'
 const categories = document.querySelectorAll('.category_list_item')
+const sidebarButton = document.querySelector('.open_sidebar_button')
+const sidebar = document.querySelector('.sidebar')
+
 
 function getTaskCount() {
     categories.forEach(item => {
@@ -32,8 +35,13 @@ categories.forEach(item => {
         item.classList.add('active')
         current_category = item.id
 
+        sidebar.classList.remove('show')
         getTasks()
     })
+})
+
+sidebarButton.addEventListener('click', () => {
+    sidebar.classList.add('show')
 })
 
 export {getTaskCount, current_category}

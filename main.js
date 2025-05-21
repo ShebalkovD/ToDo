@@ -131,7 +131,6 @@ function addTask() {
     saveTasks()
 }
 
-
 // Task handlers
 addButton.addEventListener('click', addTask)
 input.addEventListener('keydown', (e) => {

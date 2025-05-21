@@ -29,6 +29,10 @@
     src: url('font/Iosevka-Medium.ttc');
 }
 
+html {
+    font-size: 18px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -78,6 +82,19 @@ body {
     border: 2px solid var(--border-color)
 }
 
+.open_sidebar_button {
+    width: fit-content;
+    padding: 0.2rem;
+    border: 1px solid var(--border-color);
+
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    transform: rotate(90deg);
+
+    display: none;
+}
+
 .sidebar {
     width: 30%;
     height: 100%;
@@ -92,6 +109,9 @@ body {
 
 .main_content {
     width: 70%;
+    position: relative;
+}
+.main_content_wrapper{
     position: relative;
 }
 
@@ -352,6 +372,90 @@ button:focus {
 
 .category_list_item:first-child {
     border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 1440px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1024px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 18px;
+    }
+
+    .container {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .main_content {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: start;
+    }
+
+    .task_container {
+        width: 100%;
+        padding: 1rem;
+        padding-bottom: 15vh;
+    }
+
+    .main_content_wrapper {
+        width: 100%;
+    }
+
+    .main_content_wrapper h1 {
+        padding: 1rem;
+        padding-bottom: 0;
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 700;
+        background-color: var(--bg-color);
+        width: 100%;
+
+        display: none;
+    }
+
+    .main_input_container {
+        padding: 1rem;
+    }
+
+    .editor {
+        padding: 1rem;
+    }
+
+    .open_sidebar_button {
+        display: block;
+        user-select: none;
+    }
+    
+    .sidebar {
+        padding: 1rem;
+        border: 2px solid var(--border-color)
+    }
+
+    .sidebar.show {
+        display: block;
+    }
 }
 
 
