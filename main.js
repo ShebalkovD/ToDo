@@ -1,8 +1,8 @@
 // DOM elements
 const input = document.getElementById('main_input')
-export const taskContainer = document.querySelector('.task_container')
+const taskContainer = document.querySelector('.task_container')
 const addButton = document.getElementById('add_button')
-import {editorInput, editorModal} from "./editor.js"
+import { editorInput, editorModal } from "./editor.js"
 import { current_category } from "./sidebar.js"
 
 let counter = 0
@@ -108,7 +108,6 @@ function addTask() {
 
     TASKS.push(new_task)
 
-    
     input.value = ""
     getTasks()
 }
