@@ -39,13 +39,15 @@ function getTasks() {
         })
 
         // task click handler
-        task.addEventListener('click', function() {
-            let id = task.id
-            let text = task.querySelector('span').innerText
+        task.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('checkbox')) {
+                let id = task.id
+                let text = task.querySelector('span').innerText
 
-            editInput.value = text
-            editInput.dataset.id = id
-            editorModal.classList.add('show')
+                editInput.value = text
+                editInput.dataset.id = id
+                editorModal.classList.add('show')
+            }
         })
     })
 }
@@ -63,7 +65,9 @@ function addTask() {
     new_task.id = counter
     new_task.innerHTML = 
     `
-        <input type="checkbox" id="${counter}-checkbox" class="checkbox">
+        <div class="checkbox_wrapper">
+            <input type="checkbox" id="${counter}-checkbox" class="checkbox">
+        </div>
         <span>${input.value}</span>
     `
     taskContainer.appendChild(new_task)
@@ -79,7 +83,7 @@ input.addEventListener('keydown', (e) => {
     }
 })
 
-editorCloseButton.addEventListener('click', function() {
+editorCloseButton.addEventListener('click', () => {
     editorModal.classList.remove('show')
 })
 
