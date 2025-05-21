@@ -5,8 +5,6 @@ const editorConfirmButton = document.getElementById('edit_confirm_button')
 const editorCloseButton = document.getElementById('editor_close_button')
 const editorDeleteButton = document.getElementById('editor_delete_button')
 
-
-
 // Editor handlers
 editorCloseButton.addEventListener('click', () => {
     editorModal.classList.remove('show')

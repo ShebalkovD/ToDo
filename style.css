@@ -69,9 +69,30 @@ body {
     position: relative;
     width: 60%;
     height: 80vh;
+    overflow: hidden;
     
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
 
     border: 2px solid var(--border-color)
+}
+
+.sidebar {
+    width: 30%;
+    height: 100%;
+    border-right: 2px solid var(--border-color);
+    padding: 2rem;
+}
+
+.sidebar h1 {
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.main_content {
+    width: 70%;
+    position: relative;
 }
 
 .main_input_container {
@@ -139,7 +160,7 @@ button:focus {
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
-    width: calc(60% + 2rem);
+    width: 100%;
 
     font-size: 1.5rem;
     padding: 0.2rem;
@@ -224,6 +245,9 @@ button:focus {
 .task_container {
     border-top: 2px solid var(--border-color);
     padding: 2rem;
+    overflow-y: auto;
+    height: 80%;
+    scrollbar-width: thin;
 }
 
 .editor {
@@ -281,5 +305,45 @@ button:focus {
 .editor .delete_button {
     margin-left: 1rem;
 }
+
+.category_list_item {
+    background-color: var(--bg-color);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+
+    font-size: 1.5rem;
+    padding: 0.2rem;
+    padding-left: 0.5rem;
+
+    user-select: none;
+
+    color: var(--fore-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+}
+
+.category_list_item.active {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.category_list_item:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+}
+
+.category_list_item.active:hover {
+    background-color: var(--accent-color);
+}
+
+.category_list_item:first-child {
+    border-top: 1px solid var(--border-color);
+}
+
 
 
