@@ -6,7 +6,10 @@ import { editorInput, editorModal } from "./editor.js"
 import { current_category } from "./sidebar.js"
 
 let counter = 0
-export const TASKS = []
+export const TASKS = {
+    'today':[],
+    'home':[]
+}
 
 function checkInput() {
     if (input.value.length <= 0) {
@@ -28,29 +31,29 @@ export function getTasks() {
     
     taskContainer.innerHTML = ''
 
-    TASKS.forEach(task => {
-        if (task.category == current_category) {
-            let new_task = document.createElement('article')
-            new_task.classList.add('task')
-            if (task.done) {
-                new_task.classList.add('done')
-            }
-            new_task.id = task.id
-            new_task.innerHTML = 
-            `
-                <div class="checkbox_wrapper">
-                    <input type="checkbox" id="${task.id}-checkbox" class="checkbox">
-                </div>
-                <span>${task.text}</span>
-            `
-
-            if (task.done) {
-                new_task.classList.add('done')
-                new_task.querySelector('.checkbox').checked = true
-            }
-
-            taskContainer.appendChild(new_task)
+    TASKS[current_category].forEach(task => {
+       
+        let new_task = document.createElement('article')
+        new_task.classList.add('task')
+        if (task.done) {
+            new_task.classList.add('done')
         }
+        new_task.id = task.id
+        new_task.innerHTML = 
+        `
+            <div class="checkbox_wrapper">
+                <input type="checkbox" id="${task.id}-checkbox" class="checkbox">
+            </div>
+            <span>${task.text}</span>
+        `
+
+        if (task.done) {
+            new_task.classList.add('done')
+            new_task.querySelector('.checkbox').checked = true
+        }
+
+        taskContainer.appendChild(new_task)
+        
     })
 
     let tasks = document.querySelectorAll('.task')
@@ -61,14 +64,14 @@ export function getTasks() {
         checkbox.addEventListener('click', function() {
             let id = checkbox.parentElement.parentElement.id
             if (checkbox.checked) {
-                TASKS.forEach(task => {
+                TASKS[current_category].forEach(task => {
                     if (task.id == +id) {
                         task.done = true
                     }
                 })
                 task.classList.add('done')
             }else {
-                TASKS.forEach(task => {
+                TASKS[current_category].forEach(task => {
                     if (task.id == +id) {
                         task.done = false
                     }
@@ -106,7 +109,7 @@ function addTask() {
         category: current_category
     }
 
-    TASKS.push(new_task)
+    TASKS[current_category].push(new_task)
 
     input.value = ""
     getTasks()
