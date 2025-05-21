@@ -3,9 +3,10 @@ const input = document.getElementById('main_input')
 const taskContainer = document.querySelector('.task_container')
 const addButton = document.getElementById('add_button')
 const editorModal = document.querySelector('.editor')
-const editInput = document.getElementById('editor_input')
-const editConfirmButton = document.getElementById('edit_confirm_button')
+const editorInput = document.getElementById('editor_input')
+const editorConfirmButton = document.getElementById('edit_confirm_button')
 const editorCloseButton = document.getElementById('editor_close_button')
+const editorDeleteButton = document.getElementById('editor_delete_button')
 
 let counter = 0
 
@@ -44,8 +45,8 @@ function getTasks() {
                 let id = task.id
                 let text = task.querySelector('span').innerText
 
-                editInput.value = text
-                editInput.dataset.id = id
+                editorInput.value = text
+                editorInput.dataset.id = id
                 editorModal.classList.add('show')
             }
         })
@@ -87,4 +88,23 @@ editorCloseButton.addEventListener('click', () => {
     editorModal.classList.remove('show')
 })
 
+editorDeleteButton.addEventListener('click', () => {
+    let currentTask = document.getElementById(editorInput.dataset.id)
+    currentTask.remove()
+    editorModal.classList.remove('show')
+})
+
+editorConfirmButton.addEventListener('click', () => {
+    let currentTask = document.getElementById(editorInput.dataset.id)
+    currentTask.querySelector('span').innerText = editorInput.value
+    editorModal.classList.remove('show')
+})
+
+editorInput.addEventListener('keydown', (e) => {
+    if (e.code == 'Enter') {
+        let currentTask = document.getElementById(editorInput.dataset.id)
+        currentTask.querySelector('span').innerText = editorInput.value
+        editorModal.classList.remove('show')
+    }
+})
 
