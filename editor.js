@@ -9,7 +9,7 @@ const editorCloseButton = document.getElementById('editor_close_button')
 const editorDeleteButton = document.getElementById('editor_delete_button')
 const editorCategoryName = document.querySelector('.editor_category_name')
 
-export function openEditor(id, text, category) {
+function openEditor(id, text, category) {
     editorInput.dataset.id = id
     editorInput.value = text
     editorCategoryName.innerText = category
@@ -59,3 +59,5 @@ editorInput.addEventListener('keydown', (e) => {
         editorModal.classList.remove('show')
     }
 })
+
+export {openEditor}
